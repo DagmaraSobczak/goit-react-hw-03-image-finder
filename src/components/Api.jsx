@@ -1,5 +1,4 @@
 import { Component } from 'react';
-
 class PixabayAPI extends Component {
   componentDidMount() {
     this.fetchImages();

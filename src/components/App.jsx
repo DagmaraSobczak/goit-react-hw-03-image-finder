@@ -24,6 +24,10 @@ export class App extends Component {
     this.setState({ searchQuery: query, images: [] });
   };
 
+  handleInputChange = event => {
+    this.setState({ searchQuery: event.target.value });
+  };
+
   handleFetchImages = newImages => {
     this.setState(prevState => ({
       images: [...prevState.images, ...newImages],
@@ -87,8 +91,9 @@ export class App extends Component {
     return (
       <div className="App">
         <SearchBar
-          getImages={this.getImages}
           onSubmit={this.handleSearchSubmit}
+          onInputChange={this.handleInputChange}
+          query={this.state.searchQuery}
         />
         <PixabayAPI
           searchQuery={this.state.searchQuery}
