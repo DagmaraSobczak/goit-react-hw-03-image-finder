@@ -75,7 +75,7 @@ export class App extends Component {
   hideModal = () => {
     this.setState({ showModal: null });
   };
-  handleImageSelect = largeImageURL => {
+  onSelect = largeImageURL => {
     console.log('Selected image URL:', largeImageURL);
   };
 
