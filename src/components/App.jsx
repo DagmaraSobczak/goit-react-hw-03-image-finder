@@ -94,6 +94,7 @@ export class App extends Component {
           onSubmit={this.handleSearchSubmit}
           onInputChange={this.handleInputChange}
           query={this.state.searchQuery}
+          getImages={this.handleFetchImages}
         />
         <PixabayAPI
           searchQuery={this.state.searchQuery}

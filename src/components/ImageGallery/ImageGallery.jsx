@@ -10,10 +10,10 @@ class ImageGallery extends Component {
   render() {
     return (
       <ul className={style.gallery}>
-        {this.props.images.map(image => (
+        {this.props.images.map((image, index) => (
           <ImageGalleryItem
             showModal={this.props.showModal}
-            key={image.id}
+            key={index} // Używamy indeksu jako klucza
             image={image}
             onSelect={this.handleImageSelect}
           />
