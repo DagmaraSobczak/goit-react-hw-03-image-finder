@@ -25,7 +25,9 @@ export class App extends Component {
   };
 
   handleInputChange = event => {
-    this.setState({ searchQuery: event.target.value });
+    const searchQuery = event.target.value;
+
+    this.setState({ searchQuery });
   };
 
   handleFetchImages = newImages => {
@@ -34,10 +36,15 @@ export class App extends Component {
     }));
   };
   loadMore = () => {
+    const { searchQuery, page } = this.state;
+    const nextPage = page + 1;
+
     this.setState(
-      prevState => ({ page: prevState.page + 1 }),
+      {
+        page: nextPage,
+      },
       () => {
-        this.getImages(this.state.searchQuery);
+        this.getImages(searchQuery);
       }
     );
   };
@@ -48,6 +55,7 @@ export class App extends Component {
       this.setState({ images: [], page: 1, totalItems: 0 });
       showPage = 1;
     }
+
     this.setState({ loading: true, searchQuery: query });
 
     try {
@@ -80,14 +88,12 @@ export class App extends Component {
   };
 
   render() {
-    const showMore = this.state.images.length !== this.state.totalItems;
+    const { images, showModal } = this.state;
+    const showMore = images.length !== this.state.totalItems;
     let showImage = null;
-    if (this.state.showModal) {
-      showImage = this.state.images.filter(
-        image => image.id === this.state.showModal
-      )[0];
+    if (showModal) {
+      showImage = images.find(image => image.largeImageURL === showModal);
     }
-
     return (
       <div className="App">
         <SearchBar
@@ -102,14 +108,14 @@ export class App extends Component {
           onFetchImages={this.handleFetchImages}
         />
         <ImageGallery
-          onSelect={this.handleImageSelect}
+          onSelect={this.onSelect}
           showModal={this.showModal}
           images={this.state.images}
         />
         {showMore && <Button loadMore={this.loadMore} />}
         {this.state.loading && <Loader />}
         {this.state.showModal && (
-          <Modal hideModal={this.hideModal} image={showImage} />
+          <Modal hideModal={this.hideModal} image={showImage.largeImageURL} />
         )}
       </div>
     );

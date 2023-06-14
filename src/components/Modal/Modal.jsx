@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import style from './Modal.module.css';
+import css from './Modal.module.css';
 
 class Modal extends Component {
   render() {
     return (
-      <div className={style.overlay} onClick={() => this.props.hideModal()}>
-        <div className={style.modal}>
+      <div className={css.overlay} onClick={() => this.props.hideModal()}>
+        <div className={css.modal}>
           <img
-            className={style.modal_img}
+            className={css.modal_img}
             src={this.props.image.largeImageURL}
             alt=""
           />
