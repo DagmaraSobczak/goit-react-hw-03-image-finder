@@ -5,8 +5,9 @@ import style from './ImageGallery.module.css';
 
 class ImageGallery extends Component {
   handleImageSelect = largeImageURL => {
-    this.props.showModal(largeImageURL);
+    this.props.onSelect(largeImageURL);
   };
+
   render() {
     return (
       <ul className={style.gallery}>
