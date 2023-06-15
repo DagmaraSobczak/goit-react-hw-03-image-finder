@@ -23,7 +23,7 @@
   outline: none;
 }
 
-.SearchFormButton:hover {
+.searchFormButton:hover {
   opacity: 1;
 }
 
@@ -50,7 +50,7 @@
   padding-right: 4px;
 }
 
-.SearchFormInput::placeholder {
+.searchFormInput::placeholder {
   font: inherit;
   font-size: 18px;
 }

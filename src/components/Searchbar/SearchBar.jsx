@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import style from './SearchBar.module.css';
+import css from './SearchBar.module.css';
 
 class SearchBar extends Component {
   state = {
@@ -9,23 +9,28 @@ class SearchBar extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.onSubmit(this.props.query);
+    this.props.getImages(this.state.query);
   };
 
   handleChange = event => {
     this.props.onInputChange(event);
+    this.setState({ query: event.target.value });
+  };
+
+  handleFetchImages = event => {
+    this.props.getImages(this.state.query);
   };
 
   render() {
     return (
-      <header className={style.searchbar}>
-        <form className={style.form} onSubmit={this.handleSubmit}>
-          <button type="submit" className={style.searchFormButton}>
-            <span className={style.searchFormButtonabel}>Search</span>
+      <header className={css.searchbar}>
+        <form className={css.form} onSubmit={this.handleSubmit}>
+          <button type="submit" className={css.searchFormButton}>
+            <span className={css.searchFormButtonaLabel}>Search</span>
           </button>
           <input
             name="query"
-            className={style.searchFormInput}
+            className={css.searchFormInput}
             type="text"
             autoComplete="off"
             autoFocus

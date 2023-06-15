@@ -1,15 +1,5 @@
 import { Component } from 'react';
 class PixabayAPI extends Component {
-  componentDidMount() {
-    this.fetchImages();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.searchQuery !== this.props.searchQuery) {
-      this.fetchImages();
-    }
-  }
-
   fetchImages = async () => {
     const { searchQuery, apiKey, onFetchImages } = this.props;
 

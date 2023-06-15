@@ -21,12 +21,13 @@ export class App extends Component {
     totalItems: 0,
   };
   handleSearchSubmit = query => {
-    this.setState({ searchQuery: query, images: [] });
+    this.setState({ searchQuery: query, images: null }, () => {
+      this.getImages(query);
+    });
   };
 
   handleInputChange = event => {
     const searchQuery = event.target.value;
-
     this.setState({ searchQuery });
   };
 
