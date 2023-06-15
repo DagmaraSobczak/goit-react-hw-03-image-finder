@@ -17,7 +17,7 @@ class SearchBar extends Component {
     this.setState({ query: event.target.value });
   };
 
-  handleFetchImages = event => {
+  handlegetImages = event => {
     this.props.getImages(this.state.query);
   };
 

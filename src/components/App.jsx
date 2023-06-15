@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SearchBar from './Searchbar/SearchBar';
+import SearchBar from './SearchBar/SearchBar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Modal from './Modal/Modal';
@@ -7,7 +7,7 @@ import Modal from './Modal/Modal';
 import axios from 'axios';
 import Loader from './Loader/Loader';
 /*import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';*/
-import PixabayAPI from './Api';
+/*import PixabayAPI from './Api';*/
 
 const API_KEY = '34772301-2558f091501b1829db2bd0b62';
 
@@ -31,7 +31,7 @@ export class App extends Component {
     this.setState({ searchQuery });
   };
 
-  handleFetchImages = newImages => {
+  handlegetImages = newImages => {
     this.setState(prevState => ({
       images: [...prevState.images, ...newImages],
     }));
@@ -85,7 +85,7 @@ export class App extends Component {
     this.setState({ showModal: null });
   };
   onSelect = largeImageURL => {
-    console.log('Selected image URL:', largeImageURL);
+    window.open(largeImageURL, '_blank');
   };
 
   render() {
@@ -101,13 +101,9 @@ export class App extends Component {
           onSubmit={this.handleSearchSubmit}
           onInputChange={this.handleInputChange}
           query={this.state.searchQuery}
-          getImages={this.handleFetchImages}
+          getImages={this.handlegetImages}
         />
-        <PixabayAPI
-          searchQuery={this.state.searchQuery}
-          apiKey={API_KEY}
-          onFetchImages={this.handleFetchImages}
-        />
+
         <ImageGallery
           onSelect={this.onSelect}
           showModal={this.showModal}

@@ -1,4 +1,4 @@
-import { Component } from 'react';
+/*import { Component } from 'react';
 class PixabayAPI extends Component {
   fetchImages = async () => {
     const { searchQuery, apiKey, onFetchImages } = this.props;
@@ -19,4 +19,4 @@ class PixabayAPI extends Component {
   }
 }
 
-export default PixabayAPI;
+export default PixabayAPI;*/
