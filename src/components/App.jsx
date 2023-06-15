@@ -3,11 +3,10 @@ import SearchBar from './SearchBar/SearchBar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Modal from './Modal/Modal';
-/*import fetchData from './services/apiService';*/
+
 import axios from 'axios';
 import Loader from './Loader/Loader';
 /*import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';*/
-/*import PixabayAPI from './Api';*/
 
 const API_KEY = '34772301-2558f091501b1829db2bd0b62';
 
