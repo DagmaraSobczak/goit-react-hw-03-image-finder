@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SearchBar from './Searchbar/SearchBar';
+import SearchBar from './SearchBar/SearchBar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Modal from './Modal/Modal';
