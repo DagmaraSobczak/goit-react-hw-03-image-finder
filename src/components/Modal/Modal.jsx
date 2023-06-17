@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import css from './Modal.module.css';
 
 class Modal extends Component {
+  componentDidMount() {
+    console.log(this.props.image.largeImageURL); // Wyświetlenie wartości largeImageURL w konsoli po zamontowaniu komponentu
+  }
   render() {
     return (
       <div className={css.overlay} onClick={() => this.props.hideModal()}>
