@@ -75,16 +75,16 @@ export class App extends Component {
       this.setState({ loading: false });
     }
   };
-
-  showModal = id => {
-    this.setState({ showModal: id });
+  showModal = index => {
+    this.setState({ showModal: index });
   };
 
   hideModal = () => {
     this.setState({ showModal: null });
   };
   onSelect = largeImageURL => {
-    window.open(largeImageURL, '_blank');
+    this.setState({ showModal: largeImageURL });
+    /*window.open(largeImageURL, '_blank');*/
   };
 
   render() {
@@ -93,6 +93,9 @@ export class App extends Component {
     let showImage = null;
     if (showModal) {
       showImage = images.find(image => image.largeImageURL === showModal);
+    }
+    if (!showImage || !showImage.largeImageURL) {
+      showImage = null;
     }
     return (
       <div className="App">
@@ -111,7 +114,7 @@ export class App extends Component {
         {showMore && <Button loadMore={this.loadMore} />}
         {this.state.loading && <Loader />}
         {this.state.showModal && (
-          <Modal hideModal={this.hideModal} image={showImage.largeImageURL} />
+          <Modal hideModal={this.hideModal} image={showImage} />
         )}
       </div>
     );
