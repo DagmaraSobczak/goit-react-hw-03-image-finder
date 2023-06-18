@@ -59,6 +59,7 @@ export class App extends Component {
       images: [...prevState.images, ...newImages],
     }));
   };
+
   loadMore = () => {
     const { searchQuery, page } = this.state;
     const nextPage = page + 1;
@@ -76,9 +77,23 @@ export class App extends Component {
   showModal = index => {
     this.setState({ showModal: index });
   };
+  handleKeyDown = event => {
+    if (event.keyCode === 27) {
+      this.hideModal();
+    }
+  };
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown);
+  }
 
   hideModal = () => {
-    this.setState({ showModal: null });
+    this.setState({ showModal: null }, () => {
+      document.addEventListener('keydown', this.handleKeyDown);
+    });
   };
   onSelect = largeImageURL => {
     this.setState({ showModal: largeImageURL });
