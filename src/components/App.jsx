@@ -19,6 +19,30 @@ export class App extends Component {
     showModal: null,
     totalItems: 0,
   };
+
+  getImages = async () => {
+    const { searchQuery, page } = this.state;
+
+    this.setState({ loading: true });
+
+    try {
+      const response = await axios.get(
+        `https://pixabay.com/api/?q=${searchQuery}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
+      );
+
+      const resObject = response.data;
+      const newImages = resObject.hits;
+
+      this.setState(prevState => ({
+        images: [...prevState.images, ...newImages],
+        totalItems: resObject.totalHits,
+        loading: false,
+      }));
+    } catch (error) {
+      console.error('Error fetching images:', error);
+      this.setState({ loading: false });
+    }
+  };
   handleSearchSubmit = query => {
     this.setState({ searchQuery: query, images: null }, () => {
       this.getImages(query);
@@ -30,7 +54,7 @@ export class App extends Component {
     this.setState({ searchQuery });
   };
 
-  handlegetImages = newImages => {
+  handleGetImages = newImages => {
     this.setState(prevState => ({
       images: [...prevState.images, ...newImages],
     }));
@@ -49,32 +73,6 @@ export class App extends Component {
     );
   };
 
-  getImages = async query => {
-    let showPage = this.state.page;
-    if (this.state.searchQuery !== query) {
-      this.setState({ images: [], page: 1, totalItems: 0 });
-      showPage = 1;
-    }
-
-    this.setState({ loading: true, searchQuery: query });
-
-    try {
-      const response = await axios.get(
-        `https://pixabay.com/api/?q=${query}&page=${showPage}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
-      );
-
-      const resObject = response.data;
-
-      this.setState(prevState => ({
-        images: [...prevState.images, ...resObject.hits],
-        totalItems: resObject.totalHits,
-        loading: false,
-      }));
-    } catch (error) {
-      console.error('Error fetching images:', error);
-      this.setState({ loading: false });
-    }
-  };
   showModal = index => {
     this.setState({ showModal: index });
   };
@@ -103,7 +101,7 @@ export class App extends Component {
           onSubmit={this.handleSearchSubmit}
           onInputChange={this.handleInputChange}
           query={this.state.searchQuery}
-          getImages={this.handlegetImages}
+          getImages={this.handleGetImages}
         />
 
         <ImageGallery
