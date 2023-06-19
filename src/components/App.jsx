@@ -20,6 +20,9 @@ export class App extends Component {
 
   getImages = async () => {
     const { searchQuery, page } = this.state;
+    if (searchQuery.trim() === '') {
+      return;
+    }
 
     const API_KEY = '34772301-2558f091501b1829db2bd0b62';
 
@@ -51,8 +54,11 @@ export class App extends Component {
 
   handleInputChange = event => {
     const searchQuery = event.target.value;
-    this.setState({ searchQuery });
+    this.setState({ searchQuery, images: [], page: 1, totalItems: 0 }, () => {
+      this.getImages();
+    });
   };
+
   handleGetImages = () => {
     this.setState(
       prevState => ({
