@@ -8,8 +8,6 @@ import axios from 'axios';
 import Loader from './Loader/Loader';
 /*import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';*/
 
-const API_KEY = '34772301-2558f091501b1829db2bd0b62';
-
 export class App extends Component {
   state = {
     searchQuery: '',
@@ -22,6 +20,8 @@ export class App extends Component {
 
   getImages = async () => {
     const { searchQuery, page } = this.state;
+
+    const API_KEY = '34772301-2558f091501b1829db2bd0b62';
 
     this.setState({ loading: true });
 
@@ -53,11 +53,15 @@ export class App extends Component {
     const searchQuery = event.target.value;
     this.setState({ searchQuery });
   };
-
-  handleGetImages = newImages => {
-    this.setState(prevState => ({
-      images: [...prevState.images, ...newImages],
-    }));
+  handleGetImages = () => {
+    this.setState(
+      prevState => ({
+        page: prevState.page + 1,
+      }),
+      () => {
+        this.getImages();
+      }
+    );
   };
 
   loadMore = () => {
